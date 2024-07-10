@@ -1,0 +1,24 @@
+{
+  "name": "pinnacle_bets",
+  "version": "1.0.0",
+  "description": "All about bets, place bets, get your bet history or current bet status.  # Authentication   Please note that API has restriction that client password can be maximum up 10 characters long.   API uses HTTP Basic access authentication. You need to send Authorization HTTP Request header:    `Authorization: Basic <Base64 value of UTF-8 encoded  username:password >`  Example:  `Authorization: Basic U03MyOT23YbzMDc6d3c3O1DQ1` ",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc"
+  },
+  "keywords": [
+    "typescript",
+    "sdk",
+    "api",
+    "client"
+  ],
+  "author": "",
+  "license": "",
+  "devDependencies": {
+    "typescript": "5.3.3"
+  },
+  "dependencies": {
+    "zod": "3.22.0"
+  }
+}
