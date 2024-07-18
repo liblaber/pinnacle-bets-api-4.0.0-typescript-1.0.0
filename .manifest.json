@@ -1,8 +1,9 @@
 {
   "liblabVersion": "2.1.19",
-  "date": "2024-07-18T16:05:35.817Z",
+  "date": "2024-07-18T16:13:28.121Z",
   "config": {
     "apiId": 387,
+    "baseUrl": "https://api.pinnacle.com/v1",
     "sdkName": "pinnacle_bets",
     "sdkVersion": "1.0.0",
     "liblabVersion": "2",
@@ -55,7 +56,7 @@
       "httpMethodsToRetry": ["GET", "POST", "PUT", "DELETE", "PATCH", "HEAD", "OPTIONS"]
     },
     "multiTenant": true,
-    "specUrl": "https://dev-liblab-api-stack-specs.s3.us-east-1.amazonaws.com/387/open-api-spec.yaml?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIA3C2RXH7MWUCMN7ON%2F20240718%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20240718T160527Z&X-Amz-Expires=43200&X-Amz-Signature=02723cae555e10c9bec27da787d3d6b535ed5cac18ec42ba106940fd98e9bb51&X-Amz-SignedHeaders=host&x-id=GetObject",
+    "specUrl": "https://dev-liblab-api-stack-specs.s3.us-east-1.amazonaws.com/387/open-api-spec.yaml?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIA3C2RXH7MWUCMN7ON%2F20240718%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20240718T161323Z&X-Amz-Expires=43200&X-Amz-Signature=cd49ced34cc69037327bd7b0eaec8437ebd7f42d85d83bf0ea4e029ceeac8a7a&X-Amz-SignedHeaders=host&x-id=GetObject",
     "includeWatermark": false,
     "language": "typescript",
     "deliveryMethod": "zip",
