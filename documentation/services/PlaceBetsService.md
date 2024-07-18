@@ -5,9 +5,9 @@ A list of all methods in the `PlaceBetsService` service. Click on the method nam
 | Methods                             | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 | :---------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | [Bets_StraightV2](#bets_straightv2) | Place straight bet (SPREAD, MONEYLINE, TOTAL_POINTS, TEAM_TOTAL_POINTS). Please note when the status is PENDING_ACCEPTANCE and if the live delay was applied, the response will not have betId. Client would have to call /bets by uniqueRequestId to check the status if the bet was ACCEPTED. For more details please see [How to place a bet on live events?](https://github.com/pinnacleapi/pinnacleapi-documentation/blob/master/FAQ.md#how-to-place-a-bet-on-live-events) Make sure you handle properly the case of an unexpected error as per [How to handle error on placing a bet?](https://github.com/pinnacleapi/pinnacleapi-documentation/blob/master/FAQ.md#how-to-handle-unexpected-error-on-placing-a-bet) |
-| [Bets_ParlayV2](#bets_parlayv2)     | &nbsp;Make sure you handle properly the case of an unexpected error as per [How to handle error on placing a bet?](https://github.com/pinnacleapi/pinnacleapi-documentation/blob/master/FAQ.md#how-to-handle-unexpected-error-on-placing-a-bet)                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| [Bets_Teaser](#bets_teaser)         | &nbsp;Make sure you handle properly the case of an unexpected error as per [How to handle error on placing a bet?](https://github.com/pinnacleapi/pinnacleapi-documentation/blob/master/FAQ.md#how-to-handle-unexpected-error-on-placing-a-bet)                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| [Bets_Special](#bets_special)       | &nbsp;Make sure you handle properly the case of an unexpected error as per [How to handle error on placing a bet?](https://github.com/pinnacleapi/pinnacleapi-documentation/blob/master/FAQ.md#how-to-handle-unexpected-error-on-placing-a-bet)                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| [Bets_ParlayV2](#bets_parlayv2)     | Make sure you handle properly the case of an unexpected error as per [How to handle error on placing a bet?](https://github.com/pinnacleapi/pinnacleapi-documentation/blob/master/FAQ.md#how-to-handle-unexpected-error-on-placing-a-bet)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| [Bets_Teaser](#bets_teaser)         | Make sure you handle properly the case of an unexpected error as per [How to handle error on placing a bet?](https://github.com/pinnacleapi/pinnacleapi-documentation/blob/master/FAQ.md#how-to-handle-unexpected-error-on-placing-a-bet)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| [Bets_Special](#bets_special)       | Make sure you handle properly the case of an unexpected error as per [How to handle error on placing a bet?](https://github.com/pinnacleapi/pinnacleapi-documentation/blob/master/FAQ.md#how-to-handle-unexpected-error-on-placing-a-bet)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
 
 ## Bets_StraightV2
 
@@ -56,11 +56,11 @@ import { PinnacleBets, PlaceBetRequest } from 'pinnacle_bets';
     stake: 10.5,
     winRiskStake: placeBetRequestWinRiskStake,
     lineId: 420921914,
-    altLineId: 8,
+    altLineId: 5,
     fillType: fillType,
     sportId: 29,
     eventId: 757504261,
-    periodNumber: 2,
+    periodNumber: 123,
     betType: placeBetRequestBetType,
     team: team,
     side: placeBetRequestSide,
@@ -74,7 +74,7 @@ import { PinnacleBets, PlaceBetRequest } from 'pinnacle_bets';
 
 ## Bets_ParlayV2
 
-&nbsp;Make sure you handle properly the case of an unexpected error as per [How to handle error on placing a bet?](https://github.com/pinnacleapi/pinnacleapi-documentation/blob/master/FAQ.md#how-to-handle-unexpected-error-on-placing-a-bet)
+Make sure you handle properly the case of an unexpected error as per [How to handle error on placing a bet?](https://github.com/pinnacleapi/pinnacleapi-documentation/blob/master/FAQ.md#how-to-handle-unexpected-error-on-placing-a-bet)
 
 - HTTP Method: `POST`
 - Endpoint: `/v4/bets/parlay`
@@ -109,10 +109,10 @@ import { ParlayLegRequest, PinnacleBets, PlaceParlayBetRequest } from 'pinnacle_
   const parlayLegRequest: ParlayLegRequest = {
     uniqueLegId: 'CFAD8ACF-E410-437C-8F0F-33611F565981',
     lineId: 419715968,
-    altLineId: 8,
+    altLineId: 10,
     sportId: 29,
     eventId: 758023991,
-    periodNumber: 2,
+    periodNumber: 1,
     legBetType: parlayLegRequestLegBetType,
     team: 'TEAM1',
     side: parlayLegRequestSide,
@@ -137,7 +137,7 @@ import { ParlayLegRequest, PinnacleBets, PlaceParlayBetRequest } from 'pinnacle_
 
 ## Bets_Teaser
 
-&nbsp;Make sure you handle properly the case of an unexpected error as per [How to handle error on placing a bet?](https://github.com/pinnacleapi/pinnacleapi-documentation/blob/master/FAQ.md#how-to-handle-unexpected-error-on-placing-a-bet)
+Make sure you handle properly the case of an unexpected error as per [How to handle error on placing a bet?](https://github.com/pinnacleapi/pinnacleapi-documentation/blob/master/FAQ.md#how-to-handle-unexpected-error-on-placing-a-bet)
 
 - HTTP Method: `POST`
 - Endpoint: `/v4/bets/teaser`
@@ -172,18 +172,18 @@ import { PinnacleBets, PlaceTeaserBetRequest, TeaserBetLeg } from 'pinnacle_bets
   const teaserBetLeg: TeaserBetLeg = {
     legId: '10924E23-A2FE-4317-BFFD-80504675F554',
     betType: teaserBetLegBetType,
-    lineId: 8,
-    eventId: 1,
+    lineId: 7,
+    eventId: 8,
     team: 'team',
     side: teaserBetLegSide,
   };
 
   const input: PlaceTeaserBetRequest = {
     uniqueRequestId: '10924e23-a2fe-4317-bffd-80504675f554',
-    teaserId: 1,
+    teaserId: 8,
     oddsFormat: oddsFormat,
     winRiskStake: 'winRiskStake',
-    stake: 2.37,
+    stake: 6.87,
     legs: [teaserBetLeg],
   };
 
@@ -195,7 +195,7 @@ import { PinnacleBets, PlaceTeaserBetRequest, TeaserBetLeg } from 'pinnacle_bets
 
 ## Bets_Special
 
-&nbsp;Make sure you handle properly the case of an unexpected error as per [How to handle error on placing a bet?](https://github.com/pinnacleapi/pinnacleapi-documentation/blob/master/FAQ.md#how-to-handle-unexpected-error-on-placing-a-bet)
+Make sure you handle properly the case of an unexpected error as per [How to handle error on placing a bet?](https://github.com/pinnacleapi/pinnacleapi-documentation/blob/master/FAQ.md#how-to-handle-unexpected-error-on-placing-a-bet)
 
 - HTTP Method: `POST`
 - Endpoint: `/v4/bets/special`
@@ -245,5 +245,3 @@ import { MultiBetRequestSpecialBetRequest, PinnacleBets, SpecialBetRequest } fro
   console.log(data);
 })();
 ```
-
-<!-- This file was generated by liblab | https://liblab.com/ -->
