@@ -56,11 +56,11 @@ import { PinnacleBets, PlaceBetRequest } from 'pinnacle_bets';
     stake: 10.5,
     winRiskStake: placeBetRequestWinRiskStake,
     lineId: 420921914,
-    altLineId: 5,
+    altLineId: 8,
     fillType: fillType,
     sportId: 29,
     eventId: 757504261,
-    periodNumber: 123,
+    periodNumber: 2,
     betType: placeBetRequestBetType,
     team: team,
     side: placeBetRequestSide,
@@ -109,10 +109,10 @@ import { ParlayLegRequest, PinnacleBets, PlaceParlayBetRequest } from 'pinnacle_
   const parlayLegRequest: ParlayLegRequest = {
     uniqueLegId: 'CFAD8ACF-E410-437C-8F0F-33611F565981',
     lineId: 419715968,
-    altLineId: 10,
+    altLineId: 8,
     sportId: 29,
     eventId: 758023991,
-    periodNumber: 1,
+    periodNumber: 2,
     legBetType: parlayLegRequestLegBetType,
     team: 'TEAM1',
     side: parlayLegRequestSide,
@@ -172,18 +172,18 @@ import { PinnacleBets, PlaceTeaserBetRequest, TeaserBetLeg } from 'pinnacle_bets
   const teaserBetLeg: TeaserBetLeg = {
     legId: '10924E23-A2FE-4317-BFFD-80504675F554',
     betType: teaserBetLegBetType,
-    lineId: 7,
-    eventId: 8,
+    lineId: 8,
+    eventId: 1,
     team: 'team',
     side: teaserBetLegSide,
   };
 
   const input: PlaceTeaserBetRequest = {
     uniqueRequestId: '10924e23-a2fe-4317-bffd-80504675f554',
-    teaserId: 8,
+    teaserId: 1,
     oddsFormat: oddsFormat,
     winRiskStake: 'winRiskStake',
-    stake: 6.87,
+    stake: 2.37,
     legs: [teaserBetLeg],
   };
 

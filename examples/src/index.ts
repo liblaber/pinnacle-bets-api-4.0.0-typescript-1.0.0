@@ -17,7 +17,7 @@ import { PinnacleBets } from 'pinnacle_bets';
     sortDir: sortDir,
     pageSize: 1000,
     fromRecord: 9,
-    betids: [2],
+    betids: [9],
     uniqueRequestIds: ['uniqueRequestIds'],
     betType: [betsGetBetsByTypeV4BetType],
   });
