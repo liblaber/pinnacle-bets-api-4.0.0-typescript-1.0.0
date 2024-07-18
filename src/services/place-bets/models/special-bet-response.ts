@@ -7,15 +7,17 @@ import { specialBetResponseErrorCode } from './special-bet-response-error-code';
 /**
  * The shape of the model inside the application code - what the users use
  */
-export const specialBetResponse = z.object({
-  status: specialBetResponseStatus.optional(),
-  errorCode: specialBetResponseErrorCode.optional().nullable(),
-  betId: z.number().optional(),
-  uniqueRequestId: z.string().optional(),
-  win: z.number().optional(),
-  risk: z.number().optional(),
-  price: z.number().optional(),
-  betterLineWasAccepted: z.boolean().optional(),
+export const specialBetResponse: any = z.lazy(() => {
+  return z.object({
+    status: specialBetResponseStatus.optional(),
+    errorCode: specialBetResponseErrorCode.optional().nullable(),
+    betId: z.number().optional(),
+    uniqueRequestId: z.string().optional(),
+    win: z.number().optional(),
+    risk: z.number().optional(),
+    price: z.number().optional(),
+    betterLineWasAccepted: z.boolean().optional(),
+  });
 });
 
 /**
@@ -58,50 +60,54 @@ export type SpecialBetResponse = z.infer<typeof specialBetResponse>;
  * The shape of the model mapping from the api schema into the application shape.
  * Is equal to application shape if all property names match the api schema
  */
-export const specialBetResponseResponse = z
-  .object({
-    status: specialBetResponseStatus.optional(),
-    errorCode: specialBetResponseErrorCode.optional().nullable(),
-    betId: z.number().optional(),
-    uniqueRequestId: z.string().optional(),
-    win: z.number().optional(),
-    risk: z.number().optional(),
-    price: z.number().optional(),
-    betterLineWasAccepted: z.boolean().optional(),
-  })
-  .transform((data) => ({
-    status: data['status'],
-    errorCode: data['errorCode'],
-    betId: data['betId'],
-    uniqueRequestId: data['uniqueRequestId'],
-    win: data['win'],
-    risk: data['risk'],
-    price: data['price'],
-    betterLineWasAccepted: data['betterLineWasAccepted'],
-  }));
+export const specialBetResponseResponse: any = z.lazy(() => {
+  return z
+    .object({
+      status: specialBetResponseStatus.optional(),
+      errorCode: specialBetResponseErrorCode.optional().nullable(),
+      betId: z.number().optional(),
+      uniqueRequestId: z.string().optional(),
+      win: z.number().optional(),
+      risk: z.number().optional(),
+      price: z.number().optional(),
+      betterLineWasAccepted: z.boolean().optional(),
+    })
+    .transform((data) => ({
+      status: data['status'],
+      errorCode: data['errorCode'],
+      betId: data['betId'],
+      uniqueRequestId: data['uniqueRequestId'],
+      win: data['win'],
+      risk: data['risk'],
+      price: data['price'],
+      betterLineWasAccepted: data['betterLineWasAccepted'],
+    }));
+});
 
 /**
  * The shape of the model mapping from the application shape into the api schema.
  * Is equal to application shape if all property names match the api schema
  */
-export const specialBetResponseRequest = z
-  .object({
-    status: specialBetResponseStatus.nullish(),
-    errorCode: specialBetResponseErrorCode.nullish(),
-    betId: z.number().nullish(),
-    uniqueRequestId: z.string().nullish(),
-    win: z.number().nullish(),
-    risk: z.number().nullish(),
-    price: z.number().nullish(),
-    betterLineWasAccepted: z.boolean().nullish(),
-  })
-  .transform((data) => ({
-    status: data['status'],
-    errorCode: data['errorCode'],
-    betId: data['betId'],
-    uniqueRequestId: data['uniqueRequestId'],
-    win: data['win'],
-    risk: data['risk'],
-    price: data['price'],
-    betterLineWasAccepted: data['betterLineWasAccepted'],
-  }));
+export const specialBetResponseRequest: any = z.lazy(() => {
+  return z
+    .object({
+      status: specialBetResponseStatus.nullish(),
+      errorCode: specialBetResponseErrorCode.nullish(),
+      betId: z.number().nullish(),
+      uniqueRequestId: z.string().nullish(),
+      win: z.number().nullish(),
+      risk: z.number().nullish(),
+      price: z.number().nullish(),
+      betterLineWasAccepted: z.boolean().nullish(),
+    })
+    .transform((data) => ({
+      status: data['status'],
+      errorCode: data['errorCode'],
+      betId: data['betId'],
+      uniqueRequestId: data['uniqueRequestId'],
+      win: data['win'],
+      risk: data['risk'],
+      price: data['price'],
+      betterLineWasAccepted: data['betterLineWasAccepted'],
+    }));
+});

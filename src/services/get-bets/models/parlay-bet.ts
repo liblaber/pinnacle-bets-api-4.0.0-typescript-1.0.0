@@ -3,32 +3,30 @@
 import { z } from 'zod';
 import { parlayBetBetStatus } from './parlay-bet-bet-status';
 import { oddsFormat } from '../../common/odds-format';
-import {
-  cancellationReason,
-  cancellationReasonRequest,
-  cancellationReasonResponse,
-} from '../../common/cancellation-reason';
+import { cancellationReason, cancellationReasonRequest, cancellationReasonResponse } from './cancellation-reason';
 import { parlayLeg, parlayLegRequest, parlayLegResponse } from './parlay-leg';
 
 /**
  * The shape of the model inside the application code - what the users use
  */
-export const parlayBet = z.object({
-  betId: z.number(),
-  uniqueRequestId: z.string().optional(),
-  wagerNumber: z.number(),
-  betStatus: parlayBetBetStatus,
-  betType: z.string(),
-  win: z.number(),
-  risk: z.number(),
-  winLoss: z.number().optional().nullable(),
-  oddsFormat: oddsFormat,
-  customerCommission: z.number().optional().nullable(),
-  cancellationReason1: cancellationReason.optional(),
-  updateSequence: z.number(),
-  legs: z.array(parlayLeg),
-  price: z.number().optional(),
-  finalPrice: z.number().optional(),
+export const parlayBet: any = z.lazy(() => {
+  return z.object({
+    betId: z.number(),
+    uniqueRequestId: z.string().optional(),
+    wagerNumber: z.number(),
+    betStatus: parlayBetBetStatus,
+    betType: z.string(),
+    win: z.number(),
+    risk: z.number(),
+    winLoss: z.number().optional().nullable(),
+    oddsFormat: oddsFormat,
+    customerCommission: z.number().optional().nullable(),
+    cancellationReason: cancellationReason.optional(),
+    updateSequence: z.number(),
+    legs: z.array(parlayLeg),
+    price: z.number().optional(),
+    finalPrice: z.number().optional(),
+  });
 });
 
 /**
@@ -60,7 +58,7 @@ HONGKONG = Hong Kong odds format,
 INDONESIAN = Indonesian odds format,  
 MALAY = Malaysian odds format 
 
- * @property {number} - Clientâ€™s commission on the bet.
+ * @property {number} - Client’s commission on the bet.
  * @property {CancellationReason} - Possible keys \:  
 * correctTeam1Id
 * correctTeam2Id
@@ -86,78 +84,82 @@ export type ParlayBet = z.infer<typeof parlayBet>;
  * The shape of the model mapping from the api schema into the application shape.
  * Is equal to application shape if all property names match the api schema
  */
-export const parlayBetResponse = z
-  .object({
-    betId: z.number(),
-    uniqueRequestId: z.string().optional(),
-    wagerNumber: z.number(),
-    betStatus: parlayBetBetStatus,
-    betType: z.string(),
-    win: z.number(),
-    risk: z.number(),
-    winLoss: z.number().optional().nullable(),
-    oddsFormat: oddsFormat,
-    customerCommission: z.number().optional().nullable(),
-    cancellationReason: cancellationReasonResponse.optional(),
-    updateSequence: z.number(),
-    legs: z.array(parlayLegResponse),
-    price: z.number().optional(),
-    finalPrice: z.number().optional(),
-  })
-  .transform((data) => ({
-    betId: data['betId'],
-    uniqueRequestId: data['uniqueRequestId'],
-    wagerNumber: data['wagerNumber'],
-    betStatus: data['betStatus'],
-    betType: data['betType'],
-    win: data['win'],
-    risk: data['risk'],
-    winLoss: data['winLoss'],
-    oddsFormat: data['oddsFormat'],
-    customerCommission: data['customerCommission'],
-    cancellationReason1: data['cancellationReason'],
-    updateSequence: data['updateSequence'],
-    legs: data['legs'],
-    price: data['price'],
-    finalPrice: data['finalPrice'],
-  }));
+export const parlayBetResponse: any = z.lazy(() => {
+  return z
+    .object({
+      betId: z.number(),
+      uniqueRequestId: z.string().optional(),
+      wagerNumber: z.number(),
+      betStatus: parlayBetBetStatus,
+      betType: z.string(),
+      win: z.number(),
+      risk: z.number(),
+      winLoss: z.number().optional().nullable(),
+      oddsFormat: oddsFormat,
+      customerCommission: z.number().optional().nullable(),
+      cancellationReason: cancellationReasonResponse.optional(),
+      updateSequence: z.number(),
+      legs: z.array(parlayLegResponse),
+      price: z.number().optional(),
+      finalPrice: z.number().optional(),
+    })
+    .transform((data) => ({
+      betId: data['betId'],
+      uniqueRequestId: data['uniqueRequestId'],
+      wagerNumber: data['wagerNumber'],
+      betStatus: data['betStatus'],
+      betType: data['betType'],
+      win: data['win'],
+      risk: data['risk'],
+      winLoss: data['winLoss'],
+      oddsFormat: data['oddsFormat'],
+      customerCommission: data['customerCommission'],
+      cancellationReason: data['cancellationReason'],
+      updateSequence: data['updateSequence'],
+      legs: data['legs'],
+      price: data['price'],
+      finalPrice: data['finalPrice'],
+    }));
+});
 
 /**
  * The shape of the model mapping from the application shape into the api schema.
  * Is equal to application shape if all property names match the api schema
  */
-export const parlayBetRequest = z
-  .object({
-    betId: z.number().nullish(),
-    uniqueRequestId: z.string().nullish(),
-    wagerNumber: z.number().nullish(),
-    betStatus: parlayBetBetStatus.nullish(),
-    betType: z.string().nullish(),
-    win: z.number().nullish(),
-    risk: z.number().nullish(),
-    winLoss: z.number().nullish(),
-    oddsFormat: oddsFormat.nullish(),
-    customerCommission: z.number().nullish(),
-    cancellationReason1: cancellationReasonRequest.nullish(),
-    updateSequence: z.number().nullish(),
-    legs: z.array(parlayLegRequest).nullish(),
-    price: z.number().nullish(),
-    finalPrice: z.number().nullish(),
-  })
-  .transform((data) => ({
-    betId: data['betId'],
-    uniqueRequestId: data['uniqueRequestId'],
-    wagerNumber: data['wagerNumber'],
-    betStatus: data['betStatus'],
-    betType: data['betType'],
-    win: data['win'],
-    risk: data['risk'],
-    winLoss: data['winLoss'],
-    oddsFormat: data['oddsFormat'],
-    customerCommission: data['customerCommission'],
-    cancellationReason: data['cancellationReason1'],
-    updateSequence: data['updateSequence'],
-    legs: data['legs'],
-    price: data['price'],
-    finalPrice: data['finalPrice'],
-  }));
+export const parlayBetRequest: any = z.lazy(() => {
+  return z
+    .object({
+      betId: z.number().nullish(),
+      uniqueRequestId: z.string().nullish(),
+      wagerNumber: z.number().nullish(),
+      betStatus: parlayBetBetStatus.nullish(),
+      betType: z.string().nullish(),
+      win: z.number().nullish(),
+      risk: z.number().nullish(),
+      winLoss: z.number().nullish(),
+      oddsFormat: oddsFormat.nullish(),
+      customerCommission: z.number().nullish(),
+      cancellationReason: cancellationReasonRequest.nullish(),
+      updateSequence: z.number().nullish(),
+      legs: z.array(parlayLegRequest).nullish(),
+      price: z.number().nullish(),
+      finalPrice: z.number().nullish(),
+    })
+    .transform((data) => ({
+      betId: data['betId'],
+      uniqueRequestId: data['uniqueRequestId'],
+      wagerNumber: data['wagerNumber'],
+      betStatus: data['betStatus'],
+      betType: data['betType'],
+      win: data['win'],
+      risk: data['risk'],
+      winLoss: data['winLoss'],
+      oddsFormat: data['oddsFormat'],
+      customerCommission: data['customerCommission'],
+      cancellationReason: data['cancellationReason'],
+      updateSequence: data['updateSequence'],
+      legs: data['legs'],
+      price: data['price'],
+      finalPrice: data['finalPrice'],
+    }));
+});

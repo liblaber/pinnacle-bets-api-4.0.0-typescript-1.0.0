@@ -4,24 +4,21 @@ import { z } from 'zod';
 import { BaseService } from '../base-service';
 import { ContentType, HttpResponse } from '../../http';
 import { RequestConfig } from '../../http/types';
+import { Request } from '../../http/transport/request';
+import { PlaceBetRequest, placeBetRequestRequest } from './models/place-bet-request';
+import { PlaceStraightBetResponse, placeStraightBetResponseResponse } from './models/place-straight-bet-response';
+import { PlaceParlayBetRequest, placeParlayBetRequestRequest } from './models/place-parlay-bet-request';
+import { PlaceParlayBetResponse, placeParlayBetResponseResponse } from './models/place-parlay-bet-response';
+import { PlaceTeaserBetRequest, placeTeaserBetRequestRequest } from './models/place-teaser-bet-request';
+import { PlaceTeaserBetResponse, placeTeaserBetResponseResponse } from './models/place-teaser-bet-response';
 import {
   MultiBetRequestSpecialBetRequest,
-  MultiBetResponseSpecialBetResponse,
-  PlaceBetRequest,
-  PlaceParlayBetRequest,
-  PlaceParlayBetResponse,
-  PlaceStraightBetResponse,
-  PlaceTeaserBetRequest,
-  PlaceTeaserBetResponse,
   multiBetRequestSpecialBetRequestRequest,
+} from './models/multi-bet-request-special-bet-request';
+import {
+  MultiBetResponseSpecialBetResponse,
   multiBetResponseSpecialBetResponseResponse,
-  placeBetRequestRequest,
-  placeParlayBetRequestRequest,
-  placeParlayBetResponseResponse,
-  placeStraightBetResponseResponse,
-  placeTeaserBetRequestRequest,
-  placeTeaserBetResponseResponse,
-} from './models';
+} from './models/multi-bet-response-special-bet-response';
 
 export class PlaceBetsService extends BaseService {
   /**
@@ -37,20 +34,19 @@ Make sure you handle properly the case of an unexpected error as per
     body: PlaceBetRequest,
     requestConfig?: RequestConfig,
   ): Promise<HttpResponse<PlaceStraightBetResponse>> {
-    const path = '/v4/bets/straight';
-    const options: any = {
+    const request = new Request({
+      method: 'POST',
+      body,
+      path: '/v4/bets/straight',
+      config: this.config,
       responseSchema: placeStraightBetResponseResponse,
       requestSchema: placeBetRequestRequest,
-      body: body as any,
-      headers: {
-        'Content-Type': 'application/json',
-      },
       requestContentType: ContentType.Json,
       responseContentType: ContentType.Json,
-      retry: requestConfig?.retry,
-      config: this.config,
-    };
-    return this.client.post(path, options);
+      requestConfig,
+    });
+    request.addHeaderParam('Content-Type', 'application/json');
+    return this.client.call(request);
   }
 
   /**
@@ -63,20 +59,19 @@ Make sure you handle properly the case of an unexpected error as per
     body: PlaceParlayBetRequest,
     requestConfig?: RequestConfig,
   ): Promise<HttpResponse<PlaceParlayBetResponse>> {
-    const path = '/v4/bets/parlay';
-    const options: any = {
+    const request = new Request({
+      method: 'POST',
+      body,
+      path: '/v4/bets/parlay',
+      config: this.config,
       responseSchema: placeParlayBetResponseResponse,
       requestSchema: placeParlayBetRequestRequest,
-      body: body as any,
-      headers: {
-        'Content-Type': 'application/json',
-      },
       requestContentType: ContentType.Json,
       responseContentType: ContentType.Json,
-      retry: requestConfig?.retry,
-      config: this.config,
-    };
-    return this.client.post(path, options);
+      requestConfig,
+    });
+    request.addHeaderParam('Content-Type', 'application/json');
+    return this.client.call(request);
   }
 
   /**
@@ -89,20 +84,19 @@ Make sure you handle properly the case of an unexpected error as per
     body: PlaceTeaserBetRequest,
     requestConfig?: RequestConfig,
   ): Promise<HttpResponse<PlaceTeaserBetResponse>> {
-    const path = '/v4/bets/teaser';
-    const options: any = {
+    const request = new Request({
+      method: 'POST',
+      body,
+      path: '/v4/bets/teaser',
+      config: this.config,
       responseSchema: placeTeaserBetResponseResponse,
       requestSchema: placeTeaserBetRequestRequest,
-      body: body as any,
-      headers: {
-        'Content-Type': 'application/json',
-      },
       requestContentType: ContentType.Json,
       responseContentType: ContentType.Json,
-      retry: requestConfig?.retry,
-      config: this.config,
-    };
-    return this.client.post(path, options);
+      requestConfig,
+    });
+    request.addHeaderParam('Content-Type', 'application/json');
+    return this.client.call(request);
   }
 
   /**
@@ -115,19 +109,18 @@ Make sure you handle properly the case of an unexpected error as per
     body: MultiBetRequestSpecialBetRequest,
     requestConfig?: RequestConfig,
   ): Promise<HttpResponse<MultiBetResponseSpecialBetResponse>> {
-    const path = '/v4/bets/special';
-    const options: any = {
+    const request = new Request({
+      method: 'POST',
+      body,
+      path: '/v4/bets/special',
+      config: this.config,
       responseSchema: multiBetResponseSpecialBetResponseResponse,
       requestSchema: multiBetRequestSpecialBetRequestRequest,
-      body: body as any,
-      headers: {
-        'Content-Type': 'application/json',
-      },
       requestContentType: ContentType.Json,
       responseContentType: ContentType.Json,
-      retry: requestConfig?.retry,
-      config: this.config,
-    };
-    return this.client.post(path, options);
+      requestConfig,
+    });
+    request.addHeaderParam('Content-Type', 'application/json');
+    return this.client.call(request);
   }
 }

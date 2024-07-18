@@ -8,19 +8,21 @@ import { teaserLegSide } from './teaser-leg-side';
 /**
  * The shape of the model inside the application code - what the users use
  */
-export const teaserLeg = z.object({
-  sportId: z.number().optional(),
-  legBetType: teaserLegLegBetType.optional(),
-  legBetStatus: teaserLegLegBetStatus.optional(),
-  leagueId: z.number().optional(),
-  eventId: z.number().optional(),
-  eventStartTime: z.string().optional(),
-  handicap: z.number().optional(),
-  teamName: z.string().optional(),
-  side: teaserLegSide.optional(),
-  team1: z.string().optional(),
-  team2: z.string().optional(),
-  periodNumber: z.number().optional(),
+export const teaserLeg: any = z.lazy(() => {
+  return z.object({
+    sportId: z.number().optional(),
+    legBetType: teaserLegLegBetType.optional(),
+    legBetStatus: teaserLegLegBetStatus.optional(),
+    leagueId: z.number().optional(),
+    eventId: z.number().optional(),
+    eventStartTime: z.string().optional(),
+    handicap: z.number().optional(),
+    teamName: z.string().optional(),
+    side: teaserLegSide.optional(),
+    team1: z.string().optional(),
+    team2: z.string().optional(),
+    periodNumber: z.number().optional(),
+  });
 });
 
 /**
@@ -50,66 +52,70 @@ export type TeaserLeg = z.infer<typeof teaserLeg>;
  * The shape of the model mapping from the api schema into the application shape.
  * Is equal to application shape if all property names match the api schema
  */
-export const teaserLegResponse = z
-  .object({
-    sportId: z.number().optional(),
-    legBetType: teaserLegLegBetType.optional(),
-    legBetStatus: teaserLegLegBetStatus.optional(),
-    leagueId: z.number().optional(),
-    eventId: z.number().optional(),
-    eventStartTime: z.string().optional(),
-    handicap: z.number().optional(),
-    teamName: z.string().optional(),
-    side: teaserLegSide.optional(),
-    team1: z.string().optional(),
-    team2: z.string().optional(),
-    periodNumber: z.number().optional(),
-  })
-  .transform((data) => ({
-    sportId: data['sportId'],
-    legBetType: data['legBetType'],
-    legBetStatus: data['legBetStatus'],
-    leagueId: data['leagueId'],
-    eventId: data['eventId'],
-    eventStartTime: data['eventStartTime'],
-    handicap: data['handicap'],
-    teamName: data['teamName'],
-    side: data['side'],
-    team1: data['team1'],
-    team2: data['team2'],
-    periodNumber: data['periodNumber'],
-  }));
+export const teaserLegResponse: any = z.lazy(() => {
+  return z
+    .object({
+      sportId: z.number().optional(),
+      legBetType: teaserLegLegBetType.optional(),
+      legBetStatus: teaserLegLegBetStatus.optional(),
+      leagueId: z.number().optional(),
+      eventId: z.number().optional(),
+      eventStartTime: z.string().optional(),
+      handicap: z.number().optional(),
+      teamName: z.string().optional(),
+      side: teaserLegSide.optional(),
+      team1: z.string().optional(),
+      team2: z.string().optional(),
+      periodNumber: z.number().optional(),
+    })
+    .transform((data) => ({
+      sportId: data['sportId'],
+      legBetType: data['legBetType'],
+      legBetStatus: data['legBetStatus'],
+      leagueId: data['leagueId'],
+      eventId: data['eventId'],
+      eventStartTime: data['eventStartTime'],
+      handicap: data['handicap'],
+      teamName: data['teamName'],
+      side: data['side'],
+      team1: data['team1'],
+      team2: data['team2'],
+      periodNumber: data['periodNumber'],
+    }));
+});
 
 /**
  * The shape of the model mapping from the application shape into the api schema.
  * Is equal to application shape if all property names match the api schema
  */
-export const teaserLegRequest = z
-  .object({
-    sportId: z.number().nullish(),
-    legBetType: teaserLegLegBetType.nullish(),
-    legBetStatus: teaserLegLegBetStatus.nullish(),
-    leagueId: z.number().nullish(),
-    eventId: z.number().nullish(),
-    eventStartTime: z.string().nullish(),
-    handicap: z.number().nullish(),
-    teamName: z.string().nullish(),
-    side: teaserLegSide.nullish(),
-    team1: z.string().nullish(),
-    team2: z.string().nullish(),
-    periodNumber: z.number().nullish(),
-  })
-  .transform((data) => ({
-    sportId: data['sportId'],
-    legBetType: data['legBetType'],
-    legBetStatus: data['legBetStatus'],
-    leagueId: data['leagueId'],
-    eventId: data['eventId'],
-    eventStartTime: data['eventStartTime'],
-    handicap: data['handicap'],
-    teamName: data['teamName'],
-    side: data['side'],
-    team1: data['team1'],
-    team2: data['team2'],
-    periodNumber: data['periodNumber'],
-  }));
+export const teaserLegRequest: any = z.lazy(() => {
+  return z
+    .object({
+      sportId: z.number().nullish(),
+      legBetType: teaserLegLegBetType.nullish(),
+      legBetStatus: teaserLegLegBetStatus.nullish(),
+      leagueId: z.number().nullish(),
+      eventId: z.number().nullish(),
+      eventStartTime: z.string().nullish(),
+      handicap: z.number().nullish(),
+      teamName: z.string().nullish(),
+      side: teaserLegSide.nullish(),
+      team1: z.string().nullish(),
+      team2: z.string().nullish(),
+      periodNumber: z.number().nullish(),
+    })
+    .transform((data) => ({
+      sportId: data['sportId'],
+      legBetType: data['legBetType'],
+      legBetStatus: data['legBetStatus'],
+      leagueId: data['leagueId'],
+      eventId: data['eventId'],
+      eventStartTime: data['eventStartTime'],
+      handicap: data['handicap'],
+      teamName: data['teamName'],
+      side: data['side'],
+      team1: data['team1'],
+      team2: data['team2'],
+      periodNumber: data['periodNumber'],
+    }));
+});

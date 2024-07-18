@@ -7,16 +7,18 @@ import { parlayLegRequestSide } from './parlay-leg-request-side';
 /**
  * The shape of the model inside the application code - what the users use
  */
-export const parlayLegRequest = z.object({
-  uniqueLegId: z.string().optional(),
-  lineId: z.number().optional(),
-  altLineId: z.number().optional().nullable(),
-  sportId: z.number().optional(),
-  eventId: z.number().optional(),
-  periodNumber: z.number().optional(),
-  legBetType: parlayLegRequestLegBetType.optional(),
-  team: z.string().optional(),
-  side: parlayLegRequestSide.optional().nullable(),
+export const parlayLegRequest: any = z.lazy(() => {
+  return z.object({
+    uniqueLegId: z.string().optional(),
+    lineId: z.number().optional(),
+    altLineId: z.number().optional().nullable(),
+    sportId: z.number().optional(),
+    eventId: z.number().optional(),
+    periodNumber: z.number().optional(),
+    legBetType: parlayLegRequestLegBetType.optional(),
+    team: z.string().optional(),
+    side: parlayLegRequestSide.optional().nullable(),
+  });
 });
 
 /**
@@ -38,54 +40,58 @@ export type ParlayLegRequest = z.infer<typeof parlayLegRequest>;
  * The shape of the model mapping from the api schema into the application shape.
  * Is equal to application shape if all property names match the api schema
  */
-export const parlayLegRequestResponse = z
-  .object({
-    uniqueLegId: z.string().optional(),
-    lineId: z.number().optional(),
-    altLineId: z.number().optional().nullable(),
-    sportId: z.number().optional(),
-    eventId: z.number().optional(),
-    periodNumber: z.number().optional(),
-    legBetType: parlayLegRequestLegBetType.optional(),
-    team: z.string().optional(),
-    side: parlayLegRequestSide.optional().nullable(),
-  })
-  .transform((data) => ({
-    uniqueLegId: data['uniqueLegId'],
-    lineId: data['lineId'],
-    altLineId: data['altLineId'],
-    sportId: data['sportId'],
-    eventId: data['eventId'],
-    periodNumber: data['periodNumber'],
-    legBetType: data['legBetType'],
-    team: data['team'],
-    side: data['side'],
-  }));
+export const parlayLegRequestResponse: any = z.lazy(() => {
+  return z
+    .object({
+      uniqueLegId: z.string().optional(),
+      lineId: z.number().optional(),
+      altLineId: z.number().optional().nullable(),
+      sportId: z.number().optional(),
+      eventId: z.number().optional(),
+      periodNumber: z.number().optional(),
+      legBetType: parlayLegRequestLegBetType.optional(),
+      team: z.string().optional(),
+      side: parlayLegRequestSide.optional().nullable(),
+    })
+    .transform((data) => ({
+      uniqueLegId: data['uniqueLegId'],
+      lineId: data['lineId'],
+      altLineId: data['altLineId'],
+      sportId: data['sportId'],
+      eventId: data['eventId'],
+      periodNumber: data['periodNumber'],
+      legBetType: data['legBetType'],
+      team: data['team'],
+      side: data['side'],
+    }));
+});
 
 /**
  * The shape of the model mapping from the application shape into the api schema.
  * Is equal to application shape if all property names match the api schema
  */
-export const parlayLegRequestRequest = z
-  .object({
-    uniqueLegId: z.string().nullish(),
-    lineId: z.number().nullish(),
-    altLineId: z.number().nullish(),
-    sportId: z.number().nullish(),
-    eventId: z.number().nullish(),
-    periodNumber: z.number().nullish(),
-    legBetType: parlayLegRequestLegBetType.nullish(),
-    team: z.string().nullish(),
-    side: parlayLegRequestSide.nullish(),
-  })
-  .transform((data) => ({
-    uniqueLegId: data['uniqueLegId'],
-    lineId: data['lineId'],
-    altLineId: data['altLineId'],
-    sportId: data['sportId'],
-    eventId: data['eventId'],
-    periodNumber: data['periodNumber'],
-    legBetType: data['legBetType'],
-    team: data['team'],
-    side: data['side'],
-  }));
+export const parlayLegRequestRequest: any = z.lazy(() => {
+  return z
+    .object({
+      uniqueLegId: z.string().nullish(),
+      lineId: z.number().nullish(),
+      altLineId: z.number().nullish(),
+      sportId: z.number().nullish(),
+      eventId: z.number().nullish(),
+      periodNumber: z.number().nullish(),
+      legBetType: parlayLegRequestLegBetType.nullish(),
+      team: z.string().nullish(),
+      side: parlayLegRequestSide.nullish(),
+    })
+    .transform((data) => ({
+      uniqueLegId: data['uniqueLegId'],
+      lineId: data['lineId'],
+      altLineId: data['altLineId'],
+      sportId: data['sportId'],
+      eventId: data['eventId'],
+      periodNumber: data['periodNumber'],
+      legBetType: data['legBetType'],
+      team: data['team'],
+      side: data['side'],
+    }));
+});

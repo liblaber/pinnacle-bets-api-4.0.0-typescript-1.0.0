@@ -6,12 +6,14 @@ import { placeTeaserBetLegResponseErrorCode } from './place-teaser-bet-leg-respo
 /**
  * The shape of the model inside the application code - what the users use
  */
-export const placeTeaserBetLegResponse = z.object({
-  status: z.string().optional(),
-  errorCode: placeTeaserBetLegResponseErrorCode.optional(),
-  legId: z.string().optional(),
-  lineId: z.number().optional(),
-  points: z.number().optional(),
+export const placeTeaserBetLegResponse: any = z.lazy(() => {
+  return z.object({
+    status: z.string().optional(),
+    errorCode: placeTeaserBetLegResponseErrorCode.optional(),
+    legId: z.string().optional(),
+    lineId: z.number().optional(),
+    points: z.number().optional(),
+  });
 });
 
 /**
@@ -24,7 +26,7 @@ CANNOT_TEASER_LIVE_GAME = Teaser is not allowed on a live game,
 CHECK_TEASER_ERROR = The teaser is invalid, check the teaser error for more details,  
 INVALID_EVENT = The game is not found in the system,  
 INVALID_LEG_BET = The wager is not verified,  
-INVALID_LEG_BET_TYPE = Wager type is not â€œteasableâ€, can be either Spread or Total,  
+INVALID_LEG_BET_TYPE = Wager type is not “teasable”, can be either Spread or Total,  
 LINE_CHANGED = Wager is placed on a line that has changed,  
 LINE_DOES_NOT_BELONG_TO_EVENT = There was no game found for the wager,  
 OFFLINE_EVENT = Either the game is offline OR there was no game found for the wager,  
@@ -47,38 +49,42 @@ export type PlaceTeaserBetLegResponse = z.infer<typeof placeTeaserBetLegResponse
  * The shape of the model mapping from the api schema into the application shape.
  * Is equal to application shape if all property names match the api schema
  */
-export const placeTeaserBetLegResponseResponse = z
-  .object({
-    status: z.string().optional(),
-    errorCode: placeTeaserBetLegResponseErrorCode.optional(),
-    legId: z.string().optional(),
-    lineId: z.number().optional(),
-    points: z.number().optional(),
-  })
-  .transform((data) => ({
-    status: data['status'],
-    errorCode: data['errorCode'],
-    legId: data['legId'],
-    lineId: data['lineId'],
-    points: data['points'],
-  }));
+export const placeTeaserBetLegResponseResponse: any = z.lazy(() => {
+  return z
+    .object({
+      status: z.string().optional(),
+      errorCode: placeTeaserBetLegResponseErrorCode.optional(),
+      legId: z.string().optional(),
+      lineId: z.number().optional(),
+      points: z.number().optional(),
+    })
+    .transform((data) => ({
+      status: data['status'],
+      errorCode: data['errorCode'],
+      legId: data['legId'],
+      lineId: data['lineId'],
+      points: data['points'],
+    }));
+});
 
 /**
  * The shape of the model mapping from the application shape into the api schema.
  * Is equal to application shape if all property names match the api schema
  */
-export const placeTeaserBetLegResponseRequest = z
-  .object({
-    status: z.string().nullish(),
-    errorCode: placeTeaserBetLegResponseErrorCode.nullish(),
-    legId: z.string().nullish(),
-    lineId: z.number().nullish(),
-    points: z.number().nullish(),
-  })
-  .transform((data) => ({
-    status: data['status'],
-    errorCode: data['errorCode'],
-    legId: data['legId'],
-    lineId: data['lineId'],
-    points: data['points'],
-  }));
+export const placeTeaserBetLegResponseRequest: any = z.lazy(() => {
+  return z
+    .object({
+      status: z.string().nullish(),
+      errorCode: placeTeaserBetLegResponseErrorCode.nullish(),
+      legId: z.string().nullish(),
+      lineId: z.number().nullish(),
+      points: z.number().nullish(),
+    })
+    .transform((data) => ({
+      status: data['status'],
+      errorCode: data['errorCode'],
+      legId: data['legId'],
+      lineId: data['lineId'],
+      points: data['points'],
+    }));
+});

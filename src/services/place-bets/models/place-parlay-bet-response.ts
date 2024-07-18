@@ -8,25 +8,23 @@ import {
   roundRobinOptionWithOddsRequest,
   roundRobinOptionWithOddsResponse,
 } from './round-robin-option-with-odds';
-import {
-  parlayLegResponse,
-  parlayLegResponseRequest,
-  parlayLegResponseResponse,
-} from '../../common/parlay-leg-response';
+import { parlayLegResponse, parlayLegResponseRequest, parlayLegResponseResponse } from './parlay-leg-response';
 
 /**
  * The shape of the model inside the application code - what the users use
  */
-export const placeParlayBetResponse = z.object({
-  status: placeParlayBetResponseStatus.optional(),
-  errorCode: placeParlayBetResponseErrorCode.optional().nullable(),
-  betId: z.number().optional(),
-  uniqueRequestId: z.string().optional(),
-  roundRobinOptionWithOdds: z.array(roundRobinOptionWithOdds).optional(),
-  maxRiskStake: z.number().optional(),
-  minRiskStake: z.number().optional(),
-  validLegs: z.array(parlayLegResponse).optional(),
-  invalidLegs: z.array(parlayLegResponse).optional(),
+export const placeParlayBetResponse: any = z.lazy(() => {
+  return z.object({
+    status: placeParlayBetResponseStatus.optional(),
+    errorCode: placeParlayBetResponseErrorCode.optional().nullable(),
+    betId: z.number().optional(),
+    uniqueRequestId: z.string().optional(),
+    roundRobinOptionWithOdds: z.array(roundRobinOptionWithOdds).optional(),
+    maxRiskStake: z.number().optional(),
+    minRiskStake: z.number().optional(),
+    validLegs: z.array(parlayLegResponse).optional(),
+    invalidLegs: z.array(parlayLegResponse).optional(),
+  });
 });
 
 /**
@@ -69,54 +67,58 @@ export type PlaceParlayBetResponse = z.infer<typeof placeParlayBetResponse>;
  * The shape of the model mapping from the api schema into the application shape.
  * Is equal to application shape if all property names match the api schema
  */
-export const placeParlayBetResponseResponse = z
-  .object({
-    status: placeParlayBetResponseStatus.optional(),
-    errorCode: placeParlayBetResponseErrorCode.optional().nullable(),
-    betId: z.number().optional(),
-    uniqueRequestId: z.string().optional(),
-    roundRobinOptionWithOdds: z.array(roundRobinOptionWithOddsResponse).optional(),
-    maxRiskStake: z.number().optional(),
-    minRiskStake: z.number().optional(),
-    validLegs: z.array(parlayLegResponseResponse).optional(),
-    invalidLegs: z.array(parlayLegResponseResponse).optional(),
-  })
-  .transform((data) => ({
-    status: data['status'],
-    errorCode: data['errorCode'],
-    betId: data['betId'],
-    uniqueRequestId: data['uniqueRequestId'],
-    roundRobinOptionWithOdds: data['roundRobinOptionWithOdds'],
-    maxRiskStake: data['maxRiskStake'],
-    minRiskStake: data['minRiskStake'],
-    validLegs: data['validLegs'],
-    invalidLegs: data['invalidLegs'],
-  }));
+export const placeParlayBetResponseResponse: any = z.lazy(() => {
+  return z
+    .object({
+      status: placeParlayBetResponseStatus.optional(),
+      errorCode: placeParlayBetResponseErrorCode.optional().nullable(),
+      betId: z.number().optional(),
+      uniqueRequestId: z.string().optional(),
+      roundRobinOptionWithOdds: z.array(roundRobinOptionWithOddsResponse).optional(),
+      maxRiskStake: z.number().optional(),
+      minRiskStake: z.number().optional(),
+      validLegs: z.array(parlayLegResponseResponse).optional(),
+      invalidLegs: z.array(parlayLegResponseResponse).optional(),
+    })
+    .transform((data) => ({
+      status: data['status'],
+      errorCode: data['errorCode'],
+      betId: data['betId'],
+      uniqueRequestId: data['uniqueRequestId'],
+      roundRobinOptionWithOdds: data['roundRobinOptionWithOdds'],
+      maxRiskStake: data['maxRiskStake'],
+      minRiskStake: data['minRiskStake'],
+      validLegs: data['validLegs'],
+      invalidLegs: data['invalidLegs'],
+    }));
+});
 
 /**
  * The shape of the model mapping from the application shape into the api schema.
  * Is equal to application shape if all property names match the api schema
  */
-export const placeParlayBetResponseRequest = z
-  .object({
-    status: placeParlayBetResponseStatus.nullish(),
-    errorCode: placeParlayBetResponseErrorCode.nullish(),
-    betId: z.number().nullish(),
-    uniqueRequestId: z.string().nullish(),
-    roundRobinOptionWithOdds: z.array(roundRobinOptionWithOddsRequest).nullish(),
-    maxRiskStake: z.number().nullish(),
-    minRiskStake: z.number().nullish(),
-    validLegs: z.array(parlayLegResponseRequest).nullish(),
-    invalidLegs: z.array(parlayLegResponseRequest).nullish(),
-  })
-  .transform((data) => ({
-    status: data['status'],
-    errorCode: data['errorCode'],
-    betId: data['betId'],
-    uniqueRequestId: data['uniqueRequestId'],
-    roundRobinOptionWithOdds: data['roundRobinOptionWithOdds'],
-    maxRiskStake: data['maxRiskStake'],
-    minRiskStake: data['minRiskStake'],
-    validLegs: data['validLegs'],
-    invalidLegs: data['invalidLegs'],
-  }));
+export const placeParlayBetResponseRequest: any = z.lazy(() => {
+  return z
+    .object({
+      status: placeParlayBetResponseStatus.nullish(),
+      errorCode: placeParlayBetResponseErrorCode.nullish(),
+      betId: z.number().nullish(),
+      uniqueRequestId: z.string().nullish(),
+      roundRobinOptionWithOdds: z.array(roundRobinOptionWithOddsRequest).nullish(),
+      maxRiskStake: z.number().nullish(),
+      minRiskStake: z.number().nullish(),
+      validLegs: z.array(parlayLegResponseRequest).nullish(),
+      invalidLegs: z.array(parlayLegResponseRequest).nullish(),
+    })
+    .transform((data) => ({
+      status: data['status'],
+      errorCode: data['errorCode'],
+      betId: data['betId'],
+      uniqueRequestId: data['uniqueRequestId'],
+      roundRobinOptionWithOdds: data['roundRobinOptionWithOdds'],
+      maxRiskStake: data['maxRiskStake'],
+      minRiskStake: data['minRiskStake'],
+      validLegs: data['validLegs'],
+      invalidLegs: data['invalidLegs'],
+    }));
+});

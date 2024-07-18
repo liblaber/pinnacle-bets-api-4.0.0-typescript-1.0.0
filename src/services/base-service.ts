@@ -17,6 +17,10 @@ export class BaseService {
     this.config.environment = environment;
   }
 
+  set timeout(timeout: number) {
+    this.config.timeout = timeout;
+  }
+
   set username(username: string) {
     this.config.username = username;
   }

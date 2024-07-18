@@ -7,14 +7,16 @@ import { parlayLegResponseErrorCode } from './parlay-leg-response-error-code';
 /**
  * The shape of the model inside the application code - what the users use
  */
-export const parlayLegResponse = z.object({
-  status: parlayLegResponseStatus.optional(),
-  errorCode: parlayLegResponseErrorCode.optional().nullable(),
-  legId: z.string().optional(),
-  lineId: z.number().optional(),
-  altLineId: z.number().optional().nullable(),
-  price: z.number().optional(),
-  correlatedLegs: z.array(z.string()).optional(),
+export const parlayLegResponse: any = z.lazy(() => {
+  return z.object({
+    status: parlayLegResponseStatus.optional(),
+    errorCode: parlayLegResponseErrorCode.optional().nullable(),
+    legId: z.string().optional(),
+    lineId: z.number().optional(),
+    altLineId: z.number().optional().nullable(),
+    price: z.number().optional(),
+    correlatedLegs: z.array(z.string()).optional(),
+  });
 });
 
 /**
@@ -57,46 +59,50 @@ export type ParlayLegResponse = z.infer<typeof parlayLegResponse>;
  * The shape of the model mapping from the api schema into the application shape.
  * Is equal to application shape if all property names match the api schema
  */
-export const parlayLegResponseResponse = z
-  .object({
-    status: parlayLegResponseStatus.optional(),
-    errorCode: parlayLegResponseErrorCode.optional().nullable(),
-    legId: z.string().optional(),
-    lineId: z.number().optional(),
-    altLineId: z.number().optional().nullable(),
-    price: z.number().optional(),
-    correlatedLegs: z.array(z.string()).optional(),
-  })
-  .transform((data) => ({
-    status: data['status'],
-    errorCode: data['errorCode'],
-    legId: data['legId'],
-    lineId: data['lineId'],
-    altLineId: data['altLineId'],
-    price: data['price'],
-    correlatedLegs: data['correlatedLegs'],
-  }));
+export const parlayLegResponseResponse: any = z.lazy(() => {
+  return z
+    .object({
+      status: parlayLegResponseStatus.optional(),
+      errorCode: parlayLegResponseErrorCode.optional().nullable(),
+      legId: z.string().optional(),
+      lineId: z.number().optional(),
+      altLineId: z.number().optional().nullable(),
+      price: z.number().optional(),
+      correlatedLegs: z.array(z.string()).optional(),
+    })
+    .transform((data) => ({
+      status: data['status'],
+      errorCode: data['errorCode'],
+      legId: data['legId'],
+      lineId: data['lineId'],
+      altLineId: data['altLineId'],
+      price: data['price'],
+      correlatedLegs: data['correlatedLegs'],
+    }));
+});
 
 /**
  * The shape of the model mapping from the application shape into the api schema.
  * Is equal to application shape if all property names match the api schema
  */
-export const parlayLegResponseRequest = z
-  .object({
-    status: parlayLegResponseStatus.nullish(),
-    errorCode: parlayLegResponseErrorCode.nullish(),
-    legId: z.string().nullish(),
-    lineId: z.number().nullish(),
-    altLineId: z.number().nullish(),
-    price: z.number().nullish(),
-    correlatedLegs: z.array(z.string()).nullish(),
-  })
-  .transform((data) => ({
-    status: data['status'],
-    errorCode: data['errorCode'],
-    legId: data['legId'],
-    lineId: data['lineId'],
-    altLineId: data['altLineId'],
-    price: data['price'],
-    correlatedLegs: data['correlatedLegs'],
-  }));
+export const parlayLegResponseRequest: any = z.lazy(() => {
+  return z
+    .object({
+      status: parlayLegResponseStatus.nullish(),
+      errorCode: parlayLegResponseErrorCode.nullish(),
+      legId: z.string().nullish(),
+      lineId: z.number().nullish(),
+      altLineId: z.number().nullish(),
+      price: z.number().nullish(),
+      correlatedLegs: z.array(z.string()).nullish(),
+    })
+    .transform((data) => ({
+      status: data['status'],
+      errorCode: data['errorCode'],
+      legId: data['legId'],
+      lineId: data['lineId'],
+      altLineId: data['altLineId'],
+      price: data['price'],
+      correlatedLegs: data['correlatedLegs'],
+    }));
+});

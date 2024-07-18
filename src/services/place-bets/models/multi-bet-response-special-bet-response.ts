@@ -6,8 +6,10 @@ import { specialBetResponse, specialBetResponseRequest, specialBetResponseRespon
 /**
  * The shape of the model inside the application code - what the users use
  */
-export const multiBetResponseSpecialBetResponse = z.object({
-  bets: z.array(specialBetResponse).optional(),
+export const multiBetResponseSpecialBetResponse: any = z.lazy(() => {
+  return z.object({
+    bets: z.array(specialBetResponse).optional(),
+  });
 });
 
 /**
@@ -21,20 +23,22 @@ export type MultiBetResponseSpecialBetResponse = z.infer<typeof multiBetResponse
  * The shape of the model mapping from the api schema into the application shape.
  * Is equal to application shape if all property names match the api schema
  */
-export const multiBetResponseSpecialBetResponseResponse = z
-  .object({
-    bets: z.array(specialBetResponseResponse).optional(),
-  })
-  .transform((data) => ({
-    bets: data['bets'],
-  }));
+export const multiBetResponseSpecialBetResponseResponse: any = z.lazy(() => {
+  return z
+    .object({
+      bets: z.array(specialBetResponseResponse).optional(),
+    })
+    .transform((data) => ({
+      bets: data['bets'],
+    }));
+});
 
 /**
  * The shape of the model mapping from the application shape into the api schema.
  * Is equal to application shape if all property names match the api schema
  */
-export const multiBetResponseSpecialBetResponseRequest = z
-  .object({ bets: z.array(specialBetResponseRequest).nullish() })
-  .transform((data) => ({
+export const multiBetResponseSpecialBetResponseRequest: any = z.lazy(() => {
+  return z.object({ bets: z.array(specialBetResponseRequest).nullish() }).transform((data) => ({
     bets: data['bets'],
   }));
+});

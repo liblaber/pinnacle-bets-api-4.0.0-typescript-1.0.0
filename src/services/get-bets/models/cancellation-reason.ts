@@ -10,9 +10,11 @@ import {
 /**
  * The shape of the model inside the application code - what the users use
  */
-export const cancellationReason = z.object({
-  code: z.string(),
-  details: z.array(cancellationDetailsItem).optional(),
+export const cancellationReason: any = z.lazy(() => {
+  return z.object({
+    code: z.string(),
+    details: z.array(cancellationDetailsItem).optional(),
+  });
 });
 
 /**
@@ -66,23 +68,27 @@ export type CancellationReason = z.infer<typeof cancellationReason>;
  * The shape of the model mapping from the api schema into the application shape.
  * Is equal to application shape if all property names match the api schema
  */
-export const cancellationReasonResponse = z
-  .object({
-    code: z.string(),
-    details: z.array(cancellationDetailsItemResponse).optional(),
-  })
-  .transform((data) => ({
-    code: data['code'],
-    details: data['details'],
-  }));
+export const cancellationReasonResponse: any = z.lazy(() => {
+  return z
+    .object({
+      code: z.string(),
+      details: z.array(cancellationDetailsItemResponse).optional(),
+    })
+    .transform((data) => ({
+      code: data['code'],
+      details: data['details'],
+    }));
+});
 
 /**
  * The shape of the model mapping from the application shape into the api schema.
  * Is equal to application shape if all property names match the api schema
  */
-export const cancellationReasonRequest = z
-  .object({ code: z.string().nullish(), details: z.array(cancellationDetailsItemRequest).nullish() })
-  .transform((data) => ({
-    code: data['code'],
-    details: data['details'],
-  }));
+export const cancellationReasonRequest: any = z.lazy(() => {
+  return z
+    .object({ code: z.string().nullish(), details: z.array(cancellationDetailsItemRequest).nullish() })
+    .transform((data) => ({
+      code: data['code'],
+      details: data['details'],
+    }));
+});

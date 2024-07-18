@@ -4,7 +4,8 @@ import { z } from 'zod';
 import { BaseService } from '../base-service';
 import { ContentType, HttpResponse } from '../../http';
 import { RequestConfig } from '../../http/types';
-import { BettingStatusResponse, bettingStatusResponseResponse } from './models';
+import { Request } from '../../http/transport/request';
+import { BettingStatusResponse, bettingStatusResponseResponse } from './models/betting-status-response';
 
 export class BettingStatusService extends BaseService {
   /**
@@ -12,16 +13,16 @@ export class BettingStatusService extends BaseService {
    * @returns {Promise<HttpResponse<BettingStatusResponse>>} OK
    */
   async betsGetBettingStatus(requestConfig?: RequestConfig): Promise<HttpResponse<BettingStatusResponse>> {
-    const path = '/v4/bets/betting-status';
-    const options: any = {
+    const request = new Request({
+      method: 'GET',
+      path: '/v4/bets/betting-status',
+      config: this.config,
       responseSchema: bettingStatusResponseResponse,
       requestSchema: z.any(),
-      headers: {},
       requestContentType: ContentType.Json,
       responseContentType: ContentType.Json,
-      retry: requestConfig?.retry,
-      config: this.config,
-    };
-    return this.client.get(path, options);
+      requestConfig,
+    });
+    return this.client.call(request);
   }
 }

@@ -4,7 +4,8 @@ import { z } from 'zod';
 import { BaseService } from '../base-service';
 import { ContentType, HttpResponse } from '../../http';
 import { RequestConfig } from '../../http/types';
-import { GetBetsByTypeResponseV4, getBetsByTypeResponseV4Response } from './models';
+import { Request } from '../../http/transport/request';
+import { GetBetsByTypeResponseV4, getBetsByTypeResponseV4Response } from './models/get-bets-by-type-response-v4';
 import { BetsGetBetsByTypeV4Params } from './request-params';
 
 export class GetBetsService extends BaseService {
@@ -71,47 +72,26 @@ Note that there is a restriction: querying by uniqueRequestIds  is supported for
     params?: BetsGetBetsByTypeV4Params,
     requestConfig?: RequestConfig,
   ): Promise<HttpResponse<GetBetsByTypeResponseV4>> {
-    const path = '/v4/bets';
-    const options: any = {
+    const request = new Request({
+      method: 'GET',
+      path: '/v4/bets',
+      config: this.config,
       responseSchema: getBetsByTypeResponseV4Response,
       requestSchema: z.any(),
-      queryParams: {},
-      headers: {},
       requestContentType: ContentType.Json,
       responseContentType: ContentType.Json,
-      retry: requestConfig?.retry,
-      config: this.config,
-    };
-    if (params?.betlist) {
-      options.queryParams['betlist'] = params?.betlist;
-    }
-    if (params?.betStatuses) {
-      options.queryParams['betStatuses'] = params?.betStatuses;
-    }
-    if (params?.fromDate) {
-      options.queryParams['fromDate'] = params?.fromDate;
-    }
-    if (params?.toDate) {
-      options.queryParams['toDate'] = params?.toDate;
-    }
-    if (params?.sortDir) {
-      options.queryParams['sortDir'] = params?.sortDir;
-    }
-    if (params?.pageSize) {
-      options.queryParams['pageSize'] = params?.pageSize;
-    }
-    if (params?.fromRecord) {
-      options.queryParams['fromRecord'] = params?.fromRecord;
-    }
-    if (params?.betids) {
-      options.queryParams['betids'] = params?.betids;
-    }
-    if (params?.uniqueRequestIds) {
-      options.queryParams['uniqueRequestIds'] = params?.uniqueRequestIds;
-    }
-    if (params?.betType) {
-      options.queryParams['betType'] = params?.betType;
-    }
-    return this.client.get(path, options);
+      requestConfig,
+    });
+    request.addQueryParam('betlist', params?.betlist);
+    request.addQueryParam('betStatuses', params?.betStatuses);
+    request.addQueryParam('fromDate', params?.fromDate);
+    request.addQueryParam('toDate', params?.toDate);
+    request.addQueryParam('sortDir', params?.sortDir);
+    request.addQueryParam('pageSize', params?.pageSize);
+    request.addQueryParam('fromRecord', params?.fromRecord);
+    request.addQueryParam('betids', params?.betids);
+    request.addQueryParam('uniqueRequestIds', params?.uniqueRequestIds);
+    request.addQueryParam('betType', params?.betType);
+    return this.client.call(request);
   }
 }

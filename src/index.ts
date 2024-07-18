@@ -38,6 +38,12 @@ export class PinnacleBets {
     this.bettingStatus.baseUrl = environment;
   }
 
+  set timeout(timeout: number) {
+    this.placeBets.timeout = timeout;
+    this.getBets.timeout = timeout;
+    this.bettingStatus.timeout = timeout;
+  }
+
   set username(username: string) {
     this.placeBets.username = username;
     this.getBets.username = username;
